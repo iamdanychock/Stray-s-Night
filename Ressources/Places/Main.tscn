@@ -1,0 +1,145 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Ressources/Characters/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Ressources/Places/Floor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Ressources/Characters/bad guy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Ressources/Places/Background.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Ressources/Places/Fallzone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Ressources/UI/UI.tscn" type="PackedScene" id=6]
+[ext_resource path="res://models/floor/city-noises-sound-effect-free-sound-clips-city-sounds.mp3" type="AudioStream" id=7]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 16.166
+height = 33.2577
+
+[node name="Main" type="Node2D"]
+position = Vector2( -62, -39 )
+
+[node name="Background" parent="." instance=ExtResource( 4 )]
+position = Vector2( -113, -194 )
+
+[node name="Background" parent="Background" instance=ExtResource( 4 )]
+position = Vector2( 10816, 10 )
+
+[node name="UI" parent="." instance=ExtResource( 6 )]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( -21, 442 )
+scale = Vector2( 0.455803, 0.744029 )
+
+[node name="Floor" parent="." instance=ExtResource( 2 )]
+position = Vector2( -299, 39 )
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="bad guy2" parent="Enemies" instance=ExtResource( 3 )]
+light_mask = 2048
+position = Vector2( 8796, 518 )
+scale = Vector2( 1.01538, 1.14583 )
+
+[node name="Area2D" type="Area2D" parent="Enemies/bad guy2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/bad guy2/Area2D"]
+position = Vector2( 0, 5.67526 )
+shape = SubResource( 1 )
+
+[node name="bad guy" parent="Enemies" instance=ExtResource( 3 )]
+light_mask = 2048
+position = Vector2( 4485, 551 )
+scale = Vector2( 0.990674, 1.34167 )
+
+[node name="Area2D" type="Area2D" parent="Enemies/bad guy"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/bad guy/Area2D"]
+position = Vector2( 0, 11.1801 )
+shape = SubResource( 1 )
+
+[node name="bad guy3" parent="Enemies" instance=ExtResource( 3 )]
+light_mask = 2048
+position = Vector2( 14577, 388 )
+scale = Vector2( 0.760813, 1.06167 )
+
+[node name="Area2D" type="Area2D" parent="Enemies/bad guy3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/bad guy3/Area2D"]
+position = Vector2( 0, 11.1801 )
+shape = SubResource( 1 )
+
+[node name="Fall" type="Node2D" parent="."]
+
+[node name="FallZone7" parent="Fall" instance=ExtResource( 5 )]
+position = Vector2( 7310, 1124 )
+scale = Vector2( 1.04419, 2.44121 )
+
+[node name="FallZone" parent="Fall" instance=ExtResource( 5 )]
+position = Vector2( 402, 996 )
+scale = Vector2( 0.812844, 1.49634 )
+
+[node name="FallZone2" parent="Fall" instance=ExtResource( 5 )]
+position = Vector2( 1978, 1124 )
+scale = Vector2( 0.36341, 2.07319 )
+
+[node name="FallZone3" parent="Fall" instance=ExtResource( 5 )]
+position = Vector2( 2123, 1163 )
+scale = Vector2( 2.05207, 1.69813 )
+
+[node name="FallZone4" parent="Fall" instance=ExtResource( 5 )]
+position = Vector2( 2819, 1150 )
+scale = Vector2( 0.524108, 2.12863 )
+
+[node name="FallZone5" parent="Fall" instance=ExtResource( 5 )]
+position = Vector2( 3453, 1194 )
+scale = Vector2( 0.797623, 0.884321 )
+
+[node name="FallZone6" parent="Fall" instance=ExtResource( 5 )]
+position = Vector2( 5780, 1172 )
+scale = Vector2( 1.04461, 1.63145 )
+
+[node name="FallZone8" parent="Fall" instance=ExtResource( 5 )]
+position = Vector2( 21142, 996 )
+scale = Vector2( -123.224, 1.92797 )
+
+[node name="FallZone9" parent="Fall" instance=ExtResource( 5 )]
+position = Vector2( 11575, 913 )
+scale = Vector2( 1.28419, 2.44121 )
+
+[node name="FallZone10" parent="Fall" instance=ExtResource( 5 )]
+position = Vector2( 12871, 958 )
+scale = Vector2( 1.21127, 3.51918 )
+
+[node name="FallZone11" parent="Fall" instance=ExtResource( 5 )]
+position = Vector2( 14157, 923 )
+scale = Vector2( 0.741789, 3.2814 )
+
+[node name="FallZone12" parent="Fall" instance=ExtResource( 5 )]
+position = Vector2( 16057, 923 )
+scale = Vector2( 1.96138, 2.86079 )
+
+[node name="FallZone15" parent="Fall" instance=ExtResource( 5 )]
+position = Vector2( -1379, 982 )
+scale = Vector2( 3.45542, 1.11344 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -30.043
+autoplay = true
+
+[connection signal="area_entered" from="Enemies/bad guy2/Area2D" to="Player" method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="Enemies/bad guy2/Area2D" to="Player" method="_on_Area2D_body_entered"]
+[connection signal="area_entered" from="Enemies/bad guy/Area2D" to="Player" method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="Enemies/bad guy/Area2D" to="Player" method="_on_Area2D_body_entered"]
+[connection signal="area_entered" from="Enemies/bad guy3/Area2D" to="Player" method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="Enemies/bad guy3/Area2D" to="Player" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Fall/FallZone7" to="Player" method="_on_FallZone_body_entered"]
+[connection signal="body_entered" from="Fall/FallZone" to="Player" method="_on_FallZone_body_entered"]
+[connection signal="body_entered" from="Fall/FallZone2" to="Player" method="_on_FallZone_body_entered"]
+[connection signal="body_entered" from="Fall/FallZone3" to="Player" method="_on_FallZone_body_entered"]
+[connection signal="body_entered" from="Fall/FallZone4" to="Player" method="_on_FallZone_body_entered"]
+[connection signal="body_entered" from="Fall/FallZone5" to="Player" method="_on_FallZone_body_entered"]
+[connection signal="body_entered" from="Fall/FallZone6" to="Player" method="_on_FallZone_body_entered"]
+[connection signal="body_entered" from="Fall/FallZone8" to="Player" method="_on_FallZone_body_entered"]
+[connection signal="body_entered" from="Fall/FallZone9" to="Player" method="_on_FallZone_body_entered"]
+[connection signal="body_entered" from="Fall/FallZone10" to="Player" method="_on_FallZone_body_entered"]
+[connection signal="body_entered" from="Fall/FallZone11" to="Player" method="_on_FallZone_body_entered"]
+[connection signal="body_entered" from="Fall/FallZone12" to="Player" method="_on_FallZone_body_entered"]
+[connection signal="body_entered" from="Fall/FallZone15" to="Player" method="_on_FallZone_body_entered"]

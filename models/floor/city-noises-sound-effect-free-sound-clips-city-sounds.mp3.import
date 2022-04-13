@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/city-noises-sound-effect-free-sound-clips-city-sounds.mp3-2d10329f757640ffc5cceaff8928b617.mp3str"
+
+[deps]
+
+source_file="res://models/floor/city-noises-sound-effect-free-sound-clips-city-sounds.mp3"
+dest_files=[ "res://.import/city-noises-sound-effect-free-sound-clips-city-sounds.mp3-2d10329f757640ffc5cceaff8928b617.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

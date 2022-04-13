@@ -1,0 +1,163 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://models/font/simple-cat-font/Simplecat-d9xpV.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://Ressources/End/BadEnding.gd" type="Script" id=2]
+[ext_resource path="res://models/bg/tombstone.png" type="Texture" id=3]
+[ext_resource path="res://models/font/8-BIT WONDER.TTF" type="DynamicFontData" id=4]
+[ext_resource path="res://models/font/meows-nepil-font/MeowsNepilRegular-Yzvwa.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://models/end/badend.mp3" type="AudioStream" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 25
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Button:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "anim"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "animb"
+length = 4.0
+
+[sub_resource type="DynamicFont" id=5]
+size = 33
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 13
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Button:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "animb"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Button:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[node name="BadEnding" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.00784314, 0, 0, 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -131.0
+margin_top = -133.0
+margin_right = 109.0
+margin_bottom = 124.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Label" type="Label" parent="."]
+margin_left = 292.0
+margin_top = 449.0
+margin_right = 762.0
+margin_bottom = 521.0
+custom_fonts/font = SubResource( 1 )
+text = "Coton never managed to come back home"
+percent_visible = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/anim = SubResource( 3 )
+anims/animb = SubResource( 4 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 327.0
+margin_top = 84.0
+margin_right = 717.0
+margin_bottom = 145.0
+custom_fonts/normal_font = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[shake rate=30 level=20]Bad Ending [shake rate=30 level=20]"
+text = "Bad Ending "
+
+[node name="Button" type="Button" parent="."]
+visible = false
+margin_left = 781.0
+margin_top = 542.0
+margin_right = 1009.0
+margin_bottom = 567.0
+custom_fonts/font = SubResource( 6 )
+text = "Return to menu"
+flat = true
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 7 )
+anims/animb = SubResource( 8 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -3.586
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

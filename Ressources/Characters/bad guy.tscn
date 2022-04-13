@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Ressources/Characters/bad guy.gd" type="Script" id=1]
+[ext_resource path="res://models/npc/npc1.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 512, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8.76143, 44.5313 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 46.3721, 61.4592 )
+
+[node name="bad guy" type="KinematicBody2D"]
+scale = Vector2( 0.913093, 0.997498 )
+collision_layer = 4
+script = ExtResource( 1 )
+SPEED = 200
+JUMP_HEIGHT = -525
+slide = 0.1
+outofrangeTime = 0.5
+canAlwaysSee = "always"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 1.49012e-08, 16.0401 )
+scale = Vector2( 1.73446, 1.51879 )
+frames = SubResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -27.6604
+margin_top = -32.0803
+margin_right = 35.3396
+margin_bottom = 94.9197
+rect_scale = Vector2( 0.867231, 0.759397 )
+color = Color( 1, 1, 1, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 19.4686 )
+shape = SubResource( 1 )
+
+[node name="eye" type="Area2D" parent="."]
+position = Vector2( 0, -64 )
+scale = Vector2( 0.517253, 0.927753 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="eye"]
+position = Vector2( -4.27804, 75.0418 )
+scale = Vector2( 1.82723, 1.01283 )
+shape = SubResource( 2 )
+
+[node name="outofrange" type="Timer" parent="."]
+one_shot = true
+
+[node name="jumpcasts" type="Node2D" parent="."]
+position = Vector2( 0, -64 )
+
+[node name="jumpcast" type="RayCast2D" parent="jumpcasts"]
+position = Vector2( 35, 118 )
+enabled = true
+cast_to = Vector2( 64, 0 )
+
+[node name="jumpmax" type="RayCast2D" parent="jumpcasts"]
+position = Vector2( 35, 0 )
+enabled = true
+cast_to = Vector2( 64, 0 )
+
+[node name="sight" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 0 )
+collision_mask = 3
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+visible = false
+position = Vector2( 2.67029e-05, -1.52588e-05 )
+scale = Vector2( 47.7479, 37.7154 )
+
+[node name="idletimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sprite" type="Sprite" parent="."]
+__meta__ = {
+"_editor_description_": ""
+}
+
+[connection signal="timeout" from="outofrange" to="." method="_on_outofrange_timeout"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="idletimer" to="." method="_on_idletimer_timeout"]
